@@ -84,13 +84,14 @@ def getReport(input):
     report = f""" 
     number of items: {item_cnt} 
     number of customers: {len(customer_ids)} 
-    total discount: {no_discount_total -  discount_total} 
-    average discount rate before VAT (%): {(no_discount_total -  discount_total)/no_discount_total *100}
-    average order_total: {(order_total/len(order_vendor_pairs.keys()))}
-    commissions total: {total_commisions} 
-    commissions per order: {total_commisions /len(order_vendor_pairs.keys()) } 
-    commissions total from promoted products: {total_promoted_commissions} 
-    average promoted product commisions per promotion scheme run: {total_promoted_commissions / max(len(promotion_ids),1) }
+    total discount (£): {round(no_discount_total -  discount_total,2)} 
+    average discount rate before VAT (%): {round((no_discount_total -  discount_total)/no_discount_total *100,2)}
+    average order_total (£): {round(order_total/len(order_vendor_pairs.keys()),2)}
+    commissions total (£): {round(total_commisions,2)} 
+    commissions per order (£): {round(total_commisions /len(order_vendor_pairs.keys()) ,2)} 
+    commissions total from promoted products (£): {round (total_promoted_commissions,2 )} 
+    average promoted product commisions per promotion scheme run (£): {
+        round(total_promoted_commissions/max(len(promotion_ids),1),2)}
     """
     return report 
 
