@@ -20,30 +20,9 @@ def getReport(input):
     try:
         entered_date = datetime.datetime.strptime(input, '%Y-%m-%d').date()
     except:
-        return "Invalid input. Please input a valid date of the form YYYY-MM_DD"
+        return "Invalid input. Please input a valid date of the form YYYY-MM-DD"
 
-
-    with open('data/product_promotions.csv', newline='') as f:
-        reader = csv.reader(f)
-        next(reader)
-        for row in reader:
-
-            date = datetime.datetime.strptime(str(row[0]), '%Y-%m-%d').date()
-            if date == entered_date:
-                promotion_ids.add(row[2])
-                promoted_prod_id.add(row[1])
-
-    with open('data/commissions.csv', newline='') as f:
-        reader = csv.reader(f)
-        next(reader)
-        for row in reader:
-
-            date = datetime.datetime.strptime(str(row[0]), '%Y-%m-%d').date()
-            if date == entered_date:
-                commissions[row[1]] = row[2]
-
-
-    with open('data/orders.csv', newline='') as f:
+    with open('data/orders.csv', newline='', encoding = 'utf-8') as f:
         reader = csv.reader(f)
         next(reader)
         for row in reader:
@@ -53,10 +32,31 @@ def getReport(input):
                 order_vendor_pairs[row[0]] = row[2]
                 customer_ids.add(row[3])
 
+    with open('data/product_promotions.csv', newline='', encoding = 'utf-8') as f:
+        reader = csv.reader(f)
+        next(reader)
+        for row in reader:
+
+            date = datetime.datetime.strptime(str(row[0]), '%Y-%m-%d').date()
+            if date == entered_date:
+                promotion_ids.add(row[2])
+                promoted_prod_id.add(row[1])
+
+    with open('data/commissions.csv', newline='', encoding = 'utf-8') as f:
+        reader = csv.reader(f)
+        next(reader)
+        for row in reader:
+
+            date = datetime.datetime.strptime(str(row[0]), '%Y-%m-%d').date()
+            if date == entered_date:
+                commissions[row[1]] = row[2]
+
+
+
     if len(order_vendor_pairs.keys()) == 0:
         return "No records of any orders were found for this day"
 
-    with open('data/order_lines.csv', newline='') as f:
+    with open('data/order_lines.csv', newline='', encoding = 'utf-8') as f:
         reader = csv.reader(f)
         next(reader)
         for row in reader:

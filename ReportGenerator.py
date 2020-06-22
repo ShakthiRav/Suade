@@ -15,6 +15,5 @@ def update():
     return render_template('dashboard.html', report = report ,)
 
     
-
 if __name__ == "__main__":
     app.run(debug = True)
